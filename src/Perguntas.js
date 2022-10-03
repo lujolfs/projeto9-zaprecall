@@ -8,7 +8,7 @@ const shuffledDeck = deck.sort(() => Math.random() - 0.5);
 
 
 export default function PerguntasCopm(props) {
-    const {openedCard, onCardClick} = props 
+    const {openedCard, onCardClick, cardsAnswer, onFlipCard, flippedCard} = props 
 
 
     return (
@@ -16,8 +16,10 @@ export default function PerguntasCopm(props) {
             {shuffledDeck.map((card, index) => 
             (
                 <Pergunta
+                userAnswer = {cardsAnswer[index]}
                 key = {index}
                 question = {card.pergunta}
+                answer = {card.resposta}
                 title = {`Pergunta ${index +1}`}
                 onClick = {() => {onCardClick(prevState => {
                     return (
@@ -25,6 +27,8 @@ export default function PerguntasCopm(props) {
                         null : index
                     )
                 })}}
+                flipped = {flippedCard[index]}
+                onFlipCard = {() => onFlipCard(prevState =>({...prevState, [index]:true}))}
                 opened = {index === openedCard}
                 />
             ))}

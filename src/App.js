@@ -17,7 +17,8 @@ buildArray(); */
 export default function App() {
     const [openedCard, setOpenedCard] = useState(null)
     const [cardsAnswer, setCardsAnswer] = useState({})
-
+    const [flippedCard, setFlippedCard] = useState({})
+    console.log(cardsAnswer);
     return (
             
             <Container>
@@ -26,9 +27,19 @@ export default function App() {
                 <Perguntas 
                     openedCard={openedCard}
                     onCardClick={setOpenedCard}
+                    cardsAnswer={cardsAnswer}
+                    flippedCard={flippedCard}
+                    onFlipCard={setFlippedCard}
                 />
-{/*                 <Footer turnCard={turnCard} setTurnCard={setTurnCard} cardContent={cardContent} setCardContent={setCardContent} cardFinisehd={cardFinisehd} setCardFinished={setCardFinished}/>
- */}            </Container>
+                <Footer
+                    onAnswer={setCardsAnswer}
+                    openedCard={openedCard}
+                    cardsAnswer={cardsAnswer}
+                    flippedCard={flippedCard}
+                    onCardClosure={setOpenedCard}
+            
+                />
+            </Container>
     )
 }
 
