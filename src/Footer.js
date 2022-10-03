@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import deck from "./deck.js"
 
 export default function FooterComp() {
     return (
@@ -14,7 +15,7 @@ export default function FooterComp() {
                         Zap!
                     </BotaoZap>
                 </Botoes>
-                0/4 CONCLUÍDOS
+                0/{deck.length} CONCLUÍDOS
             </Footer>
     )
 }

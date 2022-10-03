@@ -1,26 +1,31 @@
+import { useState } from "react"
 import styled from "styled-components";
 import setaPlay from "./assets/img/seta_play.png"
 import setaVirar from "./assets/img/seta_virar.png"
+import deck from "./deck.js";
+
+const shuffledDeck = deck.sort(() => Math.random() - 0.5);
 
 export default function PerguntasCopm() {
+    const [turnCard, setTurnCard] = useState()
+
+
     return (
         <Perguntas>
-            <PerguntaFechada>
-                <p>Pergunta 1</p>
-                <img src={setaPlay} alt="Clique aqui para iniciar esse cartão."/>
-            </PerguntaFechada>
-            <PerguntaAberta>
-                <p>O que é JSX?</p>
-                <img src={setaVirar} alt="Clique aqui para virar o cartão."/>
-            </PerguntaAberta>
-            <PerguntaFechada>
-                <p>Pergunta 3</p>
-                <img src={setaPlay} alt="Clique aqui para iniciar esse cartão."/>
-            </PerguntaFechada>
-            <PerguntaFechada>
-                <p>Pergunta 4</p>
-                <img src={setaPlay} alt="Clique aqui para iniciar esse cartão."/>
-            </PerguntaFechada>
+            {shuffledDeck.map((d) => ((turnCard === shuffledDeck.indexOf(d)) ? (
+                <PerguntaAberta
+                key={shuffledDeck.indexOf(d)}>
+                    {d.pergunta}
+                    <img src={setaVirar} alt="Clique aqui para revelar a resposta." />
+                </PerguntaAberta>) :
+                (<PerguntaFechada
+                key={shuffledDeck.indexOf(d)}
+                onClick={() => setTurnCard(shuffledDeck.indexOf(d))}>
+                    <p>Pergunta {shuffledDeck.indexOf(d)+1}</p>
+                    <img src={setaPlay} alt="Clique aqui para iniciar esse cartão." />
+                </PerguntaFechada>)
+            ))
+            }
         </Perguntas>
     )
 }
