@@ -1,21 +1,29 @@
+import { useState } from "react"
 import styled from "styled-components";
 import deck from "./deck.js"
 
-export default function FooterComp() {
+export default function FooterComp(props) {
+    const {setTurnCard} = props
+    const {setCardContent} = props
+    const [contador, setContador] = useState(0)
+
     return (
             <Footer>
                 <Botoes>
-                    <BotaoNaoLembrei>
+                    <BotaoNaoLembrei
+                    onClick={() => {setCardContent(true); setTurnCard(); setContador(contador+1)}}>
                         Não lembrei
                     </BotaoNaoLembrei>
-                    <BotaoQuaseNao>
+                    <BotaoQuaseNao
+                    onClick={() => {setCardContent(true); setTurnCard(); setContador(contador+1)}}>
                         Quase não lembrei
                     </BotaoQuaseNao>
-                    <BotaoZap>
+                    <BotaoZap
+                    onClick={() => {setCardContent(true); setTurnCard(); setContador(contador+1)}}>
                         Zap!
                     </BotaoZap>
                 </Botoes>
-                0/{deck.length} CONCLUÍDOS
+                {contador}/{deck.length} CONCLUÍDOS
             </Footer>
     )
 }

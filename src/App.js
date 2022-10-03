@@ -1,18 +1,34 @@
+import { useState } from "react"
 import styled from "styled-components";
 import Logo from "./Logo";
 import Perguntas from "./Perguntas";
 import Footer from "./Footer";
 import GlobalStyle from "./GlobalStyle"
 
+/* let aux = [];
+function buildArray() {
+    for (let i = 0; i < deck.length; i++)
+    aux.push("");
+    console.log(aux);
+}
+
+buildArray(); */
+
 export default function App() {
+    const [openedCard, setOpenedCard] = useState(null)
+    const [cardsAnswer, setCardsAnswer] = useState({})
+
     return (
             
             <Container>
                 <GlobalStyle/>
                 <Logo/>
-                <Perguntas/>
-                <Footer/>
-            </Container>
+                <Perguntas 
+                    openedCard={openedCard}
+                    onCardClick={setOpenedCard}
+                />
+{/*                 <Footer turnCard={turnCard} setTurnCard={setTurnCard} cardContent={cardContent} setCardContent={setCardContent} cardFinisehd={cardFinisehd} setCardFinished={setCardFinished}/>
+ */}            </Container>
     )
 }
 
