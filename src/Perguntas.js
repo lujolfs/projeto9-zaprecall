@@ -8,19 +8,19 @@ const shuffledDeck = deck.sort(() => Math.random() - 0.5);
 
 export default function PerguntasCopm() {
     const [turnCard, setTurnCard] = useState()
-
+    const [cardContent, setCardContent] = useState(true)
 
     return (
         <Perguntas>
             {shuffledDeck.map((d) => ((turnCard === shuffledDeck.indexOf(d)) ? (
                 <PerguntaAberta
                 key={shuffledDeck.indexOf(d)}>
-                    {d.pergunta}
-                    <img src={setaVirar} alt="Clique aqui para revelar a resposta." />
+                    {cardContent ? d.pergunta : d.resposta}
+                    <img src={setaVirar} alt="Clique aqui para revelar a resposta." onClick={() => setCardContent(!cardContent)} />
                 </PerguntaAberta>) :
                 (<PerguntaFechada
                 key={shuffledDeck.indexOf(d)}
-                onClick={() => setTurnCard(shuffledDeck.indexOf(d))}>
+                onClick={() => {setTurnCard(shuffledDeck.indexOf(d)); setCardContent(true)}}>
                     <p>Pergunta {shuffledDeck.indexOf(d)+1}</p>
                     <img src={setaPlay} alt="Clique aqui para iniciar esse cartão." />
                 </PerguntaFechada>)
@@ -77,5 +77,6 @@ justify-content: space-between;
         position: absolute;
         bottom: 10px;
         right: 10px;
+        cursor: pointer;
     }
 `
